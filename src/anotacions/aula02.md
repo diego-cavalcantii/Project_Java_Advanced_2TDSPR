@@ -1,0 +1,1 @@
+**Record** - Classe imutavel de facil construção 

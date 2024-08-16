@@ -1,6 +1,9 @@
 package com._tdspr.diegocavalcanti.gateways;
 
 import com._tdspr.diegocavalcanti.domains.Aluno;
+import com._tdspr.diegocavalcanti.gateways.requests.AlunoPostRequest;
+import com._tdspr.diegocavalcanti.gateways.responses.AlunoResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,20 +17,31 @@ public class AlunoController {
         return ResponseEntity.ok("Hello World");
     }
     @GetMapping("/fiap/{alunoId}")
-    public ResponseEntity<String> getAluno(@PathVariable String alunoId){
-        return ResponseEntity.ok("Hello World o id é " + alunoId);
+    public Aluno getAluno(@PathVariable String alunoId){
+        return new Aluno();
     }
     @PostMapping("/fiap")
-    public ResponseEntity<Aluno> postAluno(@RequestBody Aluno aluno){
-        Aluno alunoAtualizado = new Aluno();
-        alunoAtualizado.setPrimeiroNome("Diego");
-        alunoAtualizado.setRegistro(aluno.getRegistro());
-        alunoAtualizado.setPrimeiroNome(aluno.getPrimeiroNome());
-        alunoAtualizado.setSobrenome(aluno.getSobrenome());
-        alunoAtualizado.setDocumento(aluno.getDocumento());
+    public ResponseEntity<AlunoResponse> postAluno(@RequestBody AlunoPostRequest aluno){
+        Aluno alunoAtualizado = new Aluno(aluno.primeiroNome(), aluno.sobrenome(),aluno.documento(),aluno.registro());
+        alunoAtualizado.setId("1");
+        AlunoResponse alunoResponse = AlunoResponse.builder()
+                .primeiroNome(alunoAtualizado.getPrimeiroNome())
+                .sobrenome(alunoAtualizado.getSobrenome())
+                .registro(alunoAtualizado.getRegistro())
+                .documento(alunoAtualizado.getDocumento())
+                .build();
+        return ResponseEntity.ok(alunoResponse);
+    }
 
-
-        return ResponseEntity.ok(alunoAtualizado);
+    @PatchMapping("/fiap/{alunoId}/nome")
+    public ResponseEntity<AlunoResponse> atualizaNome(@PathVariable String alunoId,@RequestBody  AlunoPatchNome nome){
+        AlunoResponse alunoNomeAtualizado = AlunoResponse.builder()
+                .primeiroNome(nome.getPrimeiroNome())
+                .sobrenome(nome.getSobrenome())
+                .documento("123456789")
+                .registro("123456")
+                .build();
+        return ResponseEntity.ok(alunoNomeAtualizado);
     }
 
 
