@@ -3,13 +3,20 @@ package com._tdspr.diegocavalcanti.gateways;
 import com._tdspr.diegocavalcanti.domains.Aluno;
 import com._tdspr.diegocavalcanti.gateways.requests.AlunoPostRequest;
 import com._tdspr.diegocavalcanti.gateways.responses.AlunoResponse;
+import com._tdspr.diegocavalcanti.usecases.CadastraAluno;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/aluno")
+@RequiredArgsConstructor
 public class AlunoController {
+
+    private final CadastraAluno cadastraAluno;
+
 
 
     @GetMapping("/fiap")
