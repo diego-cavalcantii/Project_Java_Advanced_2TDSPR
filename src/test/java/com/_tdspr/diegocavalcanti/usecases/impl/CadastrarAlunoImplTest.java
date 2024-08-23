@@ -1,16 +1,14 @@
 package com._tdspr.diegocavalcanti.usecases.impl;
 
 import com._tdspr.diegocavalcanti.domains.Aluno;
-import com._tdspr.diegocavalcanti.usecases.CadastraAluno;
+import com._tdspr.diegocavalcanti.usecases.CadastrarAluno;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+class CadastrarAlunoImplTest {
 
-class CadastraAlunoImplTest {
-
-    CadastraAluno cadastrarAluno = new CadastraAlunoImpl();
+    CadastrarAluno cadastrarAluno = new CadastrarAlunoImpl(null);
 
     @Test
     @DisplayName("Testa se as infos do objeto AlunoSerCadastrado foram devidamente copiadas para um novo objeto")

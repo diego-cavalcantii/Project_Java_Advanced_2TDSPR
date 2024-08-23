@@ -1,4 +1,6 @@
 package com._tdspr.diegocavalcanti.gateways.requests;
 
-public record AlunoPostRequest(String primeiroNome, String sobrenome, String documento, String registro) {
+import lombok.NonNull;
+
+public record AlunoPostRequest(@NonNull String primeiroNome, String sobrenome, String documento, String registro) {
 }
