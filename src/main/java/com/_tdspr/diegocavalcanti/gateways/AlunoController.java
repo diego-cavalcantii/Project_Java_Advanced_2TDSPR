@@ -6,12 +6,15 @@ import com._tdspr.diegocavalcanti.gateways.requests.AlunoPostRequest;
 import com._tdspr.diegocavalcanti.gateways.responses.AlunoResponse;
 import com._tdspr.diegocavalcanti.usecases.CadastrarAluno;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/aluno")
 @RequiredArgsConstructor
+@Validated
 public class AlunoController {
 
     private final CadastrarAluno cadastrarAluno;
@@ -33,9 +36,10 @@ public class AlunoController {
 
     @PostMapping("/fiap")
     public ResponseEntity<AlunoResponse> postAluno(@RequestBody AlunoPostRequest aluno){
+         String[] nomeSplitado = aluno.nomeCompleto().split(" ");
 
 
-        Aluno alunoASerCadastrado = new Aluno(aluno.primeiroNome(), aluno.sobrenome(),aluno.documento(),null);
+        Aluno alunoASerCadastrado = new Aluno(nomeSplitado[0],nomeSplitado[1] ,aluno.documento(),null);
         Aluno alunoCadastro = cadastrarAluno.executa(alunoASerCadastrado);
 
         AlunoResponse alunoResponse = AlunoResponse.builder()
@@ -48,7 +52,7 @@ public class AlunoController {
     }
 
     @PatchMapping("/fiap/{alunoId}/nome")
-    public ResponseEntity<AlunoResponse> atualizaNome(@PathVariable String alunoId,@RequestBody AlunoPatchNome nome){
+    public ResponseEntity<AlunoResponse> atualizaNome(@PathVariable @NotBlank String alunoId, @RequestBody AlunoPatchNome nome){
         AlunoResponse alunoNomeAtualizado = AlunoResponse.builder()
                 .primeiroNome(nome.getPrimeiroNome())
                 .sobrenome(nome.getSobrenome())
