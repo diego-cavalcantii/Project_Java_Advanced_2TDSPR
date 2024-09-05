@@ -1,22 +1,31 @@
 package com._tdspr.diegocavalcanti.domains;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class Professor extends Pessoa{
+@Entity
+@Builder
+public class Professor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String disciplina;
+    private String materia;
 
-    public Professor() {
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pessoa pessoa;
 
-    public Professor(String disciplina) {
-        this.disciplina = disciplina;
-    }
-
-    public Professor(String primeiroNome, String sobrenome, String documento, String disciplina) {
-        super(primeiroNome, sobrenome, documento);
-        this.disciplina = disciplina;
-    }
+    @OneToMany
+    private List<Aluno> aluno;
 
 
 }

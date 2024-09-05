@@ -1,17 +1,12 @@
 spring:
-  h2:
-    console:
-      enabled: true
+#  h2:
+#    console:
+#      enabled: true
   datasource:
-    url: jdbc:h2:mem:java-advanced
-    driverClassName: org.h2.Driver
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
+    driverClassName: oracle.jdbc.OracleDriver
     username: rm553351
-    password: FiapJ7zE%
+    password: 120303
   jpa:
-    database:
-      platform: org.hibernate.dialect.H2Dialect
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
+    hibernate:
+      ddl_auto: update

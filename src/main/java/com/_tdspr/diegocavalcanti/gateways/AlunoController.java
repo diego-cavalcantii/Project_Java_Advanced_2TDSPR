@@ -1,6 +1,7 @@
 package com._tdspr.diegocavalcanti.gateways;
 
 import com._tdspr.diegocavalcanti.domains.Aluno;
+import com._tdspr.diegocavalcanti.domains.Pessoa;
 import com._tdspr.diegocavalcanti.gateways.requests.AlunoPatchNome;
 import com._tdspr.diegocavalcanti.gateways.requests.AlunoPostRequest;
 import com._tdspr.diegocavalcanti.gateways.responses.AlunoResponse;
@@ -38,17 +39,19 @@ public class AlunoController {
     public ResponseEntity<AlunoResponse> postAluno(@RequestBody AlunoPostRequest aluno){
          String[] nomeSplitado = aluno.nomeCompleto().split(" ");
 
+//         Aluno alunoASerCadastrado = Aluno.builder().pessoa(Pessoa.bui)
 
-        Aluno alunoASerCadastrado = new Aluno(nomeSplitado[0],nomeSplitado[1] ,aluno.documento(),null);
-        Aluno alunoCadastro = cadastrarAluno.executa(alunoASerCadastrado);
 
-        AlunoResponse alunoResponse = AlunoResponse.builder()
-                .primeiroNome(alunoCadastro.getPrimeiroNome())
-                .sobrenome(alunoCadastro.getSobrenome())
-                .registro(String.valueOf(alunoCadastro.getRegistro()))
-                .documento(alunoCadastro.getDocumento())
-                .build();
-        return ResponseEntity.ok(alunoResponse);
+//        Aluno alunoASerCadastrado = new Aluno(nomeSplitado[0],nomeSplitado[1] ,aluno.documento(),null);
+//        Aluno alunoCadastro = cadastrarAluno.executa(alunoASerCadastrado);
+
+//        AlunoResponse alunoResponse = AlunoResponse.builder()
+//                .primeiroNome(alunoCadastro.getPrimeiroNome())
+//                .sobrenome(alunoCadastro.getSobrenome())
+//                .registro(String.valueOf(alunoCadastro.getRegistro()))
+//                .documento(alunoCadastro.getDocumento())
+//                .build();
+        return ResponseEntity.ok(null);
     }
 
     @PatchMapping("/fiap/{alunoId}/nome")

@@ -1,10 +1,7 @@
 package com._tdspr.diegocavalcanti.domains;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,25 +13,24 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "aluno_graduacao")
-public class Aluno extends Pessoa{
+public class Aluno {
 
     @Id
-    @GeneratedValue
-    private Integer registro;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String registro;
+
     @Column(name = "nickname")
     private String apelido;
 //    @JsonIgnore // ignore this field in the response
-    private String id;
 
+    private String materiaPreferida;
 
-
-    public Aluno(String primeiroNome, String sobrenome, String documento, Integer registro) {
-        super(primeiroNome, sobrenome, documento);
-        this.registro = registro;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pessoa pessoa;
 
 }
