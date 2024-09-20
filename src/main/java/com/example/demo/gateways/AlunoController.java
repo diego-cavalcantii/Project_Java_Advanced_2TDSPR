@@ -7,11 +7,16 @@ import com.example.demo.gateways.requests.AlunoPostRequest;
 import com.example.demo.gateways.responses.AlunoResponse;
 import com.example.demo.usecases.CadastrarAluno;
 import jakarta.validation.Valid;
+
+import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -110,18 +115,21 @@ public class  AlunoController {
   }
 
 
-  @GetMapping("/apelido/{apelido}")
-  public ResponseEntity<String> getAlunoPorApelido(@PathVariable String apelido) {
-    Optional<Aluno> alunoByApelido = alunoRepository.findAlunoByApelido(apelido);
+  @GetMapping("/apelido")
+  public ResponseEntity<Page<Aluno>> getAlunoPorApelido(@RequestParam String apelido, @RequestParam Integer page) {
+    PageRequest pageRequest = PageRequest.ofSize(page);
+    Page<Aluno> alunoByApelido = alunoRepository.findAlunoByApelido(apelido, pageRequest);
 
-    return ResponseEntity.ok(apelido);
+    return ResponseEntity.ok(alunoByApelido);
   }
 
-  @GetMapping("/materia-preferida/{materia}")
-  public ResponseEntity<String> getAlunoPorMateriaPreferida(@PathVariable String materia) {
-    List<Aluno> alunosByMateriaPreferida = alunoRepository.findAlunosByMateriaPreferida(materia);
+  @GetMapping("/materia-preferida")
+  public ResponseEntity<Page<Aluno>> getAlunoPorMateriaPreferida(@RequestParam String materia, @RequestParam Integer page) {
+    PageRequest pageRequest = PageRequest.of(page,21, Sort.by("apelido").ascending());
 
-    return ResponseEntity.ok("Hello World");
+    Page<Aluno> alunosByMateriaPreferida = alunoRepository.findAlunosByMateriaPreferida(materia,pageRequest);
+
+    return ResponseEntity.ok(alunosByMateriaPreferida);
   }
 
   @GetMapping("/materia-preferida/{materia}/apelido/{apelido}")
@@ -136,6 +144,20 @@ public class  AlunoController {
     List<Aluno> alunosByLocalDate = alunoRepository.findAlunosByDataDaMatricula(dataDaMatricula);
 
     return ResponseEntity.ok("Hello World");
+  }
+
+  @GetMapping("/nome")
+  public ResponseEntity<List<Aluno>> getAlunoPorNome(@RequestParam String nome) {
+    List<Aluno> alunoByPessoaPrimeiroNomeContains = alunoRepository.findAlunoByPessoaPrimeiroNomeContains(nome);
+
+    return ResponseEntity.ok(alunoByPessoaPrimeiroNomeContains);
+  }
+
+  @GetMapping("/sobrenome")
+  public ResponseEntity<List<Aluno>> getAlunoPorSobrenome(@RequestParam String sobrenome) {
+    List<Aluno> alunoByPessoaSobrenomeContains = alunoRepository.findAlunoByPessoaSobrenomeEquals(sobrenome);
+
+    return ResponseEntity.ok(alunoByPessoaSobrenomeContains);
   }
 }
 

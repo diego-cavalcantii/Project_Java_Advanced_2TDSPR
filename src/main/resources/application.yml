@@ -1,12 +1,26 @@
+#spring:
+##  h2:
+##    console:
+##      enabled: true
+#  datasource:
+#    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
+#    username: rm553351
+#    password: 120303
+#    driver-class-name: oracle.jdbc.OracleDriver
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+
 spring:
-#  h2:
-#    console:
-#      enabled: true
   datasource:
-    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
-    username: rm553351
-    password: 120303
-    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:mysql://localhost:3306/aluno_professor?useSSL=false&serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+#      ddl-auto: create
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
