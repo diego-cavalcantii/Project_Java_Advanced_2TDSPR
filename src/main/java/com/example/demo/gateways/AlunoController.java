@@ -1,6 +1,6 @@
 package com.example.demo.gateways;
 
-import com.example.demo.domains.Aluno;
+import com.example.demo.domains.alunos.Aluno;
 import com.example.demo.domains.Pessoa;
 import com.example.demo.gateways.requests.AlunoPatchNome;
 import com.example.demo.gateways.requests.AlunoPostRequest;
@@ -8,9 +8,7 @@ import com.example.demo.gateways.responses.AlunoResponse;
 import com.example.demo.usecases.CadastrarAluno;
 import jakarta.validation.Valid;
 
-import java.awt.print.Pageable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -94,7 +92,7 @@ public class  AlunoController {
         .primeiroNome(alunoCadastrado.getPessoa().getPrimeiroNome())
         .sobrenome(alunoCadastrado.getPessoa().getSobrenome())
         .documento(alunoCadastrado.getPessoa().getDocumento())
-        .registro(String.valueOf(alunoCadastrado.getRegistro()))
+        .registro(String.valueOf(alunoCadastrado.getAlunoId().getRegistro()))
         .build();
     return ResponseEntity.ok(alunoResponse);
   }

@@ -1,6 +1,6 @@
 package com.example.demo.usecases;
 
-import com.example.demo.domains.Aluno;
+import com.example.demo.domains.alunos.Aluno;
 import org.springframework.stereotype.Service;
 
 @Service

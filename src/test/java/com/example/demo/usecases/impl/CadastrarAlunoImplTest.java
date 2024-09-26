@@ -1,6 +1,6 @@
 package com.example.demo.usecases.impl;
 
-import com.example.demo.domains.Aluno;
+import com.example.demo.domains.alunos.Aluno;
 import com.example.demo.gateways.AlunoRepository;
 import com.example.demo.usecases.CadastrarAluno;
 import org.junit.jupiter.api.Assertions;

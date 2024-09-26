@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.domains.Aluno;
+import com.example.demo.domains.alunos.Aluno;
 import com.example.demo.domains.Pessoa;
 import com.example.demo.gateways.AlunoRepository;
 import java.time.LocalDate;

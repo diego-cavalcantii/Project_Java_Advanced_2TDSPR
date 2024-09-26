@@ -1,12 +1,10 @@
-package com.example.demo.domains;
+package com.example.demo.domains.professor;
 
-import jakarta.persistence.CascadeType;
+import com.example.demo.domains.alunos.Aluno;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,13 +19,16 @@ import lombok.NoArgsConstructor;
 public class Professor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private ProfessorId professorId;
 
-    private String materia;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.UUID)
+//    private String id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Pessoa pessoa;
+//    private String materia;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Pessoa pessoa;
 
     @OneToMany(mappedBy = "professor")
     private List<Aluno> alunos;

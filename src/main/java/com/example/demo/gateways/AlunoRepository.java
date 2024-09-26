@@ -1,13 +1,12 @@
 package com.example.demo.gateways;
 
-import com.example.demo.domains.Aluno;
+import com.example.demo.domains.alunos.Aluno;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface AlunoRepository extends JpaRepository<Aluno, String> {
 

@@ -1,5 +1,6 @@
 package com.example.demo.domains;
 
+import com.example.demo.domains.alunos.Aluno;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -1,13 +1,10 @@
-package com.example.demo.domains;
+package com.example.demo.domains.alunos;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import com.example.demo.domains.Materia;
+import com.example.demo.domains.Pessoa;
+import com.example.demo.domains.professor.Professor;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -49,14 +46,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+//@IdClass(AlunoId.class)
 public class Aluno {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private String registro;
+  private AlunoId alunoId;
 
   private String apelido;
-
   private String materiaPreferida;
 
   @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
